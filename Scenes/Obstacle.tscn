@@ -1,0 +1,26 @@
+[gd_scene load_steps=3 format=3 uid="uid://c3wobppfgmbwr"]
+
+[ext_resource type="Script" uid="uid://dsiwo7vlc1abb" path="res://Scripts/Obstacle.gd" id="1_2sxyv"]
+[ext_resource type="Texture2D" uid="uid://dqcfviu5ybvj5" path="res://Assets/rockGrass.png" id="1_uh273"]
+
+[node name="Obstacle" type="RigidBody2D"]
+z_index = -95
+gravity_scale = 0.0
+script = ExtResource("1_2sxyv")
+
+[node name="Bottom" type="CollisionPolygon2D" parent="."]
+position = Vector2(-10, 250)
+polygon = PackedVector2Array(-55, 116, 11, -120, 51, 117)
+disabled = true
+
+[node name="Sprite" type="Sprite2D" parent="Bottom"]
+texture = ExtResource("1_uh273")
+
+[node name="Top" type="CollisionPolygon2D" parent="."]
+position = Vector2(10, -250)
+rotation = 3.14159
+polygon = PackedVector2Array(-55, 116, 11, -120, 51, 117)
+disabled = true
+
+[node name="Sprite" type="Sprite2D" parent="Top"]
+texture = ExtResource("1_uh273")

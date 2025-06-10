@@ -1,0 +1,57 @@
+[gd_scene load_steps=8 format=3 uid="uid://yd3y3c3cnrds"]
+
+[ext_resource type="Texture2D" uid="uid://ibpce7oafam7" path="res://Assets/Planes/planeRed1.png" id="1_gntrk"]
+[ext_resource type="Texture2D" uid="uid://gnyqswmc86lt" path="res://Assets/Planes/planeRed2.png" id="2_dewec"]
+[ext_resource type="Texture2D" uid="uid://jqwq70ehbtw1" path="res://Assets/Planes/planeRed3.png" id="3_5ixxa"]
+[ext_resource type="Script" uid="uid://bf8jyct8jkygy" path="res://Scripts/PlaneAnimation.gd" id="4_dewec"]
+
+[sub_resource type="GDScript" id="GDScript_rpqav"]
+resource_name = "Player"
+script/source = "extends RigidBody2D
+var _jumpForce = 600;
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	pass
+
+		
+func _physics_process(delta: float) -> void:
+	if Input.is_action_just_pressed(\"Jump\"):
+		linear_velocity = Vector2.ZERO
+		linear_velocity = Vector2.UP * _jumpForce 
+"
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_gntrk"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_gntrk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_dewec")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_5ixxa")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 24.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_kyqiw"]
+radius = 26.1725
+
+[node name="Player" type="RigidBody2D"]
+gravity_scale = 2.0
+script = SubResource("GDScript_rpqav")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.8, 0.8)
+sprite_frames = SubResource("SpriteFrames_gntrk")
+animation = &"Idle"
+frame_progress = 0.132757
+script = ExtResource("4_dewec")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_kyqiw")
+debug_color = Color(0.99068, 0, 0.281078, 1)

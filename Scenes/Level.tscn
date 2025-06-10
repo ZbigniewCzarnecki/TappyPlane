@@ -1,0 +1,44 @@
+[gd_scene load_steps=5 format=3 uid="uid://cx8gf4um281yr"]
+
+[ext_resource type="PackedScene" uid="uid://yd3y3c3cnrds" path="res://Scenes/Player.tscn" id="1_0ba56"]
+[ext_resource type="Texture2D" uid="uid://c7df3u4jk4j7m" path="res://Assets/groundGrass.png" id="2_vsvp5"]
+[ext_resource type="Texture2D" uid="uid://ep33sugrvg30" path="res://Assets/background.png" id="3_8rbpu"]
+[ext_resource type="Script" uid="uid://geepu34yj5n2" path="res://Scripts/Spawner.gd" id="4_fuudy"]
+
+[node name="Level" type="Node2D"]
+
+[node name="Timer" type="Timer" parent="."]
+process_callback = 0
+wait_time = 3.0
+autostart = true
+
+[node name="Player" parent="." instance=ExtResource("1_0ba56")]
+position = Vector2(321, 181)
+
+[node name="Spawner" type="Node2D" parent="."]
+position = Vector2(1050, 270)
+script = ExtResource("4_fuudy")
+
+[node name="Environment" type="Node2D" parent="."]
+
+[node name="GroundSprites" type="Node2D" parent="Environment"]
+position = Vector2(492, 508)
+scale = Vector2(1.3078, 1.1338)
+
+[node name="Bottom" type="Sprite2D" parent="Environment/GroundSprites"]
+z_index = -90
+texture = ExtResource("2_vsvp5")
+
+[node name="Top" type="Sprite2D" parent="Environment/GroundSprites"]
+z_index = -90
+position = Vector2(2.29395, -418.944)
+rotation = 3.14159
+texture = ExtResource("2_vsvp5")
+
+[node name="Background" type="Sprite2D" parent="Environment"]
+z_index = -100
+position = Vector2(489, 271)
+scale = Vector2(1.3078, 1.1338)
+texture = ExtResource("3_8rbpu")
+
+[connection signal="timeout" from="Timer" to="Spawner" method="_on_timer_timeout"]
